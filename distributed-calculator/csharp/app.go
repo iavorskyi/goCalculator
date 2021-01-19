@@ -19,18 +19,18 @@ type Operands struct {
     OperandTwo float32 `json:"operandTwo,string"`
 }
 
-func substract(w http.ResponseWriter, r *http.Request) {
+func subtract(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var operands Operands
 	json.NewDecoder(r.Body).Decode(&operands)
-	fmt.Println(fmt.Sprintf("%s%f%s%f", "Substracting ", operands.OperandOne, " - ", operands.OperandTwo))
+	fmt.Println(fmt.Sprintf("%s%f%s%f", "Subtracting ", operands.OperandOne, " - ", operands.OperandTwo))
 	json.NewEncoder(w).Encode(operands.OperandOne * operands.OperandTwo)
 }
  
 func main() {
 	router := mux.NewRouter()
 	
-	router.HandleFunc("/substract", substract).Methods("POST", "OPTIONS")
+	router.HandleFunc("/subtract", subtract).Methods("POST", "OPTIONS")
 	log.Fatal(http.ListenAndServe(":6000", router))
 }
