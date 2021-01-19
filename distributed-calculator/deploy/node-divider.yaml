@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: divide
-        image: dapriosamples/distributed-calculator-node:latest
+        image: sunua/calcdivide:latest
         ports:
         - containerPort: 6000
         imagePullPolicy: Always

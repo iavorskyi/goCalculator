@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: subtract
-        image: dapriosamples/distributed-calculator-csharp:latest
+        image: sunua/calcsubstract:latest
         ports:
         - containerPort: 6000
         imagePullPolicy: Always
