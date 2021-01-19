@@ -19,13 +19,13 @@ type Operands struct {
     OperandTwo float32 `json:"operandTwo,string"`
 }
 
-func multiply(w http.ResponseWriter, r *http.Request) {
+func substract(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var operands Operands
 	json.NewDecoder(r.Body).Decode(&operands)
-	fmt.Println(fmt.Sprintf("%s%f%s%f", "Substract ", operands.OperandOne, " - ", operands.OperandTwo))
-	json.NewEncoder(w).Encode(operands.OperandOne - operands.OperandTwo)
+	fmt.Println(fmt.Sprintf("%s%f%s%f", "Substracting ", operands.OperandOne, " - ", operands.OperandTwo))
+	json.NewEncoder(w).Encode(operands.OperandOne * operands.OperandTwo)
 }
  
 func main() {

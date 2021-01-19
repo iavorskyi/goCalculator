@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: subtractapp
+  name: substractapp
   labels:
     app: subtract
 spec:
@@ -15,7 +15,7 @@ spec:
         app: subtract
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "subtractapp"
+        dapr.io/app-id: "substractapp"
         dapr.io/app-port: "6000"
         dapr.io/config: "appconfig"
     spec:
