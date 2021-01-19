@@ -1,18 +1,11 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim-amd64 AS build-env
-WORKDIR /app
-ARG DOTNET_PLATFORM="x64"
-
-
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
-RUN dotnet restore -r linux-${DOTNET_PLATFORM}
-
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:3.1
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "Subtract.dll"]
+#first stage - builder
+FROM golang:1.15-buster as builder
+WORKDIR /dir
+COPY app.go .
+RUN go get -d -v
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+#second stage
+FROM scratch
+WORKDIR /root/
+COPY --from=builder /dir/app .
+CMD ["./app"]

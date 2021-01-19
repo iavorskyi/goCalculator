@@ -1,7 +1,11 @@
-FROM python:3.7-alpine
-COPY . /app
-WORKDIR /app
-RUN pip install flask flask_cors
-ENTRYPOINT ["python"]
-EXPOSE 5000
-CMD ["app.py"]
+#first stage - builder
+FROM golang:1.15-buster as builder
+WORKDIR /dir
+COPY app.go .
+RUN go get -d -v
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+#second stage
+FROM scratch
+WORKDIR /root/
+COPY --from=builder /dir/app .
+CMD ["./app"]
