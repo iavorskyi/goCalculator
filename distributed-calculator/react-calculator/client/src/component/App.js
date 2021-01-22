@@ -21,7 +21,7 @@ export default class App extends React.Component {
   }
 
   handleClick = async (buttonName) => {
-    console.log("обработчик клика " + buttonName)
+    console.log("Click button " + buttonName)
     let value = await calculate(this.state, buttonName); // в стейте здесь next total и operation
     this.setState(value);
     this.persistState(this.state);

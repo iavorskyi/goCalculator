@@ -25,9 +25,9 @@ export default async function operate(operandOne, operandTwo, operationSymbol) {
       operandTwo
     }),
   });
-  console.log("после rawResponse" + rawResponse)
+  console.log("after rawResponse" + rawResponse)
   const response = await rawResponse.json();
-  console.log("после response" + response)
+  console.log("after response" + response)
 
   return response.toString();
   

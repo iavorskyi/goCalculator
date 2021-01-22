@@ -4,7 +4,7 @@
 // ------------------------------------------------------------
 
 package main
- 
+
 import (
 	"encoding/json"
 	"fmt"
@@ -16,8 +16,8 @@ import (
 )
 
 type Operands struct {
-    OperandOne float32 `json:"operandOne,string"`
-    OperandTwo float32 `json:"operandTwo,string"`
+	OperandOne float32 `json:"operandOne,string"`
+	OperandTwo float32 `json:"operandTwo,string"`
 }
 
 func sqrt(w http.ResponseWriter, r *http.Request) {
@@ -32,9 +32,14 @@ func sqrt(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println(fmt.Sprintf("%s%f", "Getting sqroot ", operands.OperandOne))
-	json.NewEncoder(w).Encode(math.Sqrt(float64(operands.OperandOne)))
+	err = json.NewEncoder(w).Encode(math.Sqrt(float64(operands.OperandOne)))
+	if err != nil {
+		fmt.Println(err)
+		w.WriteHeader(400)
+		return
+	}
 }
- 
+
 func main() {
 	router := mux.NewRouter()
 

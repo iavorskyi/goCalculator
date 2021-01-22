@@ -52,12 +52,9 @@ export default async function calculate(obj, buttonName) { // передали �
 
   if (buttonName === "root") {
     if (obj.operation && obj.next) {
-      console.log("obj + next");
       obj.operation = "root"
-      console.log(obj.operation + " - операция")
-
+      
       let result = await operate(obj.total, obj.next, obj.operation);
-      console.log(obj.operation + " - операция;---" + obj.total + " - total;---" + obj.next + " - next;---"+ result + " - result;")
       return {
         total: result,
         next: result,
@@ -65,12 +62,9 @@ export default async function calculate(obj, buttonName) { // передали �
       };
     }
     if (obj.next) {
-      console.log("только next")
       obj.operation = "root"
-      console.log(obj.operation + " - операция")
 
       let result = await operate(obj.total, obj.next, obj.operation);
-      console.log(obj.operation + " - операция;---" + obj.total + " - total;---" + obj.next + " - next;---"+ result + " - result;")
 
       return {
         total: result,
