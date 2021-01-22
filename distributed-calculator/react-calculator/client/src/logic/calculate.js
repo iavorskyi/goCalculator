@@ -12,7 +12,7 @@ import isNumber from "./isNumber";
  *   next:String       the next number to be operated on with the total
  *   operation:String  +, -, etc.
  */
-export default async function calculate(obj, buttonName) {
+export default async function calculate(obj, buttonName) { // передали в obj текущие next, operation и total и название кнопки
   if (buttonName === "AC") {
     return {
       total: null,
@@ -50,25 +50,34 @@ export default async function calculate(obj, buttonName) {
     };
   }
 
-  if (buttonName === "%") {
+  if (buttonName === "root") {
     if (obj.operation && obj.next) {
+      console.log("obj + next");
+      obj.operation = "root"
+      console.log(obj.operation + " - операция")
+
       let result = await operate(obj.total, obj.next, obj.operation);
+      console.log(obj.operation + " - операция;---" + obj.total + " - total;---" + obj.next + " - next;---"+ result + " - result;")
       return {
-        total: Big(result)
-          .div(Big("100"))
-          .toString(),
-        next: null,
-        operation: null,
+        total: result,
+        next: result,
+        operation: buttonName,
       };
     }
     if (obj.next) {
+      console.log("только next")
+      obj.operation = "root"
+      console.log(obj.operation + " - операция")
+
+      let result = await operate(obj.total, obj.next, obj.operation);
+      console.log(obj.operation + " - операция;---" + obj.total + " - total;---" + obj.next + " - next;---"+ result + " - result;")
+
       return {
-        next: Big(obj.next)
-          .div(Big("100"))
-          .toString(),
+        total: result,
+        next: result,
+        operation: null,
       };
     }
-    return {};
   }
 
   if (buttonName === ".") {

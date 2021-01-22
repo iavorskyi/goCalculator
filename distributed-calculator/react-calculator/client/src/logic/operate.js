@@ -2,7 +2,8 @@ const operationMap = {
   "+": "add",
   "-": "subtract",
   "x": "multiply",
-  "÷": "divide"
+  "÷": "divide",
+  "root": "sqrt"
 };
 
 export default async function operate(operandOne, operandTwo, operationSymbol) {
@@ -24,7 +25,10 @@ export default async function operate(operandOne, operandTwo, operationSymbol) {
       operandTwo
     }),
   });
+  console.log("после rawResponse" + rawResponse)
   const response = await rawResponse.json();
+  console.log("после response" + response)
 
   return response.toString();
+  
 }

@@ -7,10 +7,11 @@ package main
  
 import (
 	"encoding/json"
-    "log"
-	"net/http"
 	"fmt"
-	
+	"log"
+	"math"
+	"net/http"
+
 	"github.com/gorilla/mux"
 )
 
@@ -19,18 +20,24 @@ type Operands struct {
     OperandTwo float32 `json:"operandTwo,string"`
 }
 
-func subtract(w http.ResponseWriter, r *http.Request) {
+func sqrt(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("in sqrt main")
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var operands Operands
-	json.NewDecoder(r.Body).Decode(&operands)
-	fmt.Println(fmt.Sprintf("%s%f%s%f", "Subtracting ", operands.OperandOne, " - ", operands.OperandTwo))
-	json.NewEncoder(w).Encode(operands.OperandOne - operands.OperandTwo)
+	err := json.NewDecoder(r.Body).Decode(&operands)
+	if err != nil {
+		fmt.Println(err)
+		w.WriteHeader(400)
+		return
+	}
+	fmt.Println(fmt.Sprintf("%s%f", "Getting sqroot ", operands.OperandOne))
+	json.NewEncoder(w).Encode(math.Sqrt(float64(operands.OperandOne)))
 }
  
 func main() {
 	router := mux.NewRouter()
-	
-	router.HandleFunc("/subtract", subtract).Methods("POST", "OPTIONS")
+
+	router.HandleFunc("/sqrt", sqrt).Methods("POST", "OPTIONS")
 	log.Fatal(http.ListenAndServe(":6000", router))
 }

@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: subtractapp
+  name: sqrtapp
   labels:
-    app: subtract
+    app: sqrt
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: subtract
+      app: sqrt
   template:
     metadata:
       labels:
-        app: subtract
+        app: sqrt
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "subtractapp"
+        dapr.io/app-id: "sqrt"
         dapr.io/app-port: "6000"
         dapr.io/config: "appconfig"
     spec:
       containers:
-      - name: subtract
-        image: sunua/calcsubstract:latest
+      - name: sqrt
+        image: sunua/calcsqrt:latest
         ports:
         - containerPort: 6000
         imagePullPolicy: Always
