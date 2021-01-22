@@ -31,6 +31,9 @@ func sqrt(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(400)
 		return
 	}
+	if operands.OperandOne == 0 {
+		operands.OperandOne = operands.OperandTwo
+	}
 	fmt.Println(fmt.Sprintf("%s%f", "Getting sqroot ", operands.OperandOne))
 	err = json.NewEncoder(w).Encode(math.Sqrt(float64(operands.OperandOne)))
 	if err != nil {

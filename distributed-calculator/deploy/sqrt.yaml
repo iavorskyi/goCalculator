@@ -15,13 +15,13 @@ spec:
         app: sqrt
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "sqrt"
+        dapr.io/app-id: "sqrtapp"
         dapr.io/app-port: "6000"
         dapr.io/config: "appconfig"
     spec:
       containers:
-      - name: sqrt
-        image: sunua/calcsqrt:latest
-        ports:
-        - containerPort: 6000
-        imagePullPolicy: Always
+        - name: sqrt
+          image: sunua/calcsqrt:latest
+          ports:
+            - containerPort: 6000
+          imagePullPolicy: Always
