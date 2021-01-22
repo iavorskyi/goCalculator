@@ -3,7 +3,7 @@ const operationMap = {
   "-": "subtract",
   "x": "multiply",
   "÷": "divide",
-  "root": "sqrt"
+  "√": "sqrt"
 };
 
 export default async function operate(operandOne, operandTwo, operationSymbol) {

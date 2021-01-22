@@ -50,8 +50,8 @@ export default async function calculate(obj, buttonName) { // передали �
     };
   }
 
-  if (buttonName === "root") {
-    if (obj.operation && obj.next) {
+  if (obj.operation && obj.next) {
+      if (buttonName === "√") {
       // obj.operation = "root"
       
       let result = await operate(obj.total, obj.next, obj.operation);
