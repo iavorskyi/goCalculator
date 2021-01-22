@@ -61,17 +61,17 @@ export default async function calculate(obj, buttonName) { // передали �
         operation: buttonName,
       };
     }
-    if (obj.next) {
-      obj.operation = "root"
+    // if (obj.next) {
+    //   obj.operation = "root"
 
-      let result = await operate(obj.total, obj.next, obj.operation);
+    //   let result = await operate(obj.total, obj.next, obj.operation);
 
-      return {
-        total: result,
-        next: result,
-        operation: null,
-      };
-    }
+    //   return {
+    //     total: result,
+    //     next: result,
+    //     operation: null,
+    //   };
+    // }
   }
 
   if (buttonName === ".") {
